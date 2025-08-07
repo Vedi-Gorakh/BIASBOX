@@ -1,0 +1,31 @@
+.faq-container {
+  background-color: #FFFBF5;
+  padding: 40px;
+  max-width: 800px;
+  margin: auto;
+  font-family: "Segoe UI", sans-serif;
+  color: #5e1675;
+  
+}
+
+.faq-container h2 {
+  font-size: 22px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  border-bottom: 1px solid #5e1675;
+  padding-bottom: 10px;
+}
+
+.faq-list {
+  list-style-type: decimal;
+  padding-left: 20px;
+}
+
+.faq-list li {
+  margin-bottom: 20px;
+  line-height: 1.5;
+}
+
+.faq-list strong {
+  color: #5e1675;
+}

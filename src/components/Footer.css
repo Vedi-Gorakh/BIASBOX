@@ -1,0 +1,52 @@
+/* src/components/Footer.css */
+
+.footer {
+  background-color: #5E1675;
+  color: #FFFBF5;
+  padding: 40px 60px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 40px;
+  font-family: 'Arial', sans-serif;
+}
+
+.footer-section {
+  flex: 1;
+  min-width: 250px;
+  max-width: 400px;
+}
+
+.footer-section p,
+.footer-section li {
+  margin-bottom: 10px;
+  line-height: 1.6;
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+}
+
+.newsletter-input {
+  display: flex;
+  margin-top: 10px;
+}
+
+.newsletter-input input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background-color: #FFFBF5;
+  font-size: 14px;
+}
+
+.newsletter-input button {
+  background-color: #FFFBF5;
+  border: none;
+  padding: 0 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+}

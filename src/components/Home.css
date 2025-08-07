@@ -1,0 +1,44 @@
+/* src/styles/Home.css */
+.home-container {
+  padding: 40px;
+  background-color: #FFFBF5;
+      font-family: sans-serif;
+  
+}
+.view-all-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.B1 {
+  padding: 12px 36px;
+  background-color: #5E1675;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 6px;
+  font-size: larger;
+  align-self: center;
+  display: block;
+  margin: 0 auto;
+}
+
+.B1:hover {
+  background-color: #5E1675;
+}
+
+.home-title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #5E1675;
+  margin-bottom: 24px;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+  justify-items: center;
+}

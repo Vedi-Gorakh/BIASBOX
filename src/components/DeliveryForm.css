@@ -1,0 +1,50 @@
+.delivery-container {
+  max-width: 500px;
+  margin: 50px auto;
+  padding: 30px;
+  background-color: #FFFBF5;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.delivery-container h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #5E1675;
+}
+
+.delivery-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.delivery-container input {
+  padding: 12px;
+  border-radius: 6px;
+  background-color: #fff4f1;
+  border: 1px solid #fff4f1;
+  font-size: 15px;
+  transition: border 0.3s ease;
+}
+
+.delivery-container input:focus {
+  border-color: #5E1675;
+  outline: none;
+}
+
+.delivery-container button {
+  background-color: #5E1675;
+  color: white;
+  border: none;
+  padding: 12px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.delivery-container button:hover {
+  background-color: #470d5c;
+}

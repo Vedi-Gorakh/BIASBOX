@@ -1,0 +1,33 @@
+.gallery-section {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  background-color: #ffffff; /* light cream */
+  height: 607px;
+  overflow: hidden;
+}
+
+.gallery-block {
+  flex: 1;
+  background-size: cover;
+  background-position: center;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s;
+}
+
+.gallery-block:hover {
+  transform: scale(1.05);
+  z-index: 2;
+}
+
+.gallery-name {
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  text-align: center;
+  text-shadow: 1px 1px 3px black;
+}
+
