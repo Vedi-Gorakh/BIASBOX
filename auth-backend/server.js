@@ -16,6 +16,14 @@ app.use('/api/auth', authRoutes);
 app.use('/api/user', require('./routes/userRoutes'));       // profile, password
 app.use('/api/orders', require('./routes/orderRoutes'));
 app.use('/api/profile', profileRoutes);
+
+const FRONTEND_URL = process.env.FRONTEND_URL || 'https://vedi-gorakh.github.io/BIASBOX/';
+
+app.use(cors({
+  origin: FRONTEND_URL,
+  credentials: true,
+}));
+
 app.get("/", (req, res) => {
   res.send("API is running...");
 });
