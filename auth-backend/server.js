@@ -16,21 +16,11 @@ const app = express();
 app.use(express.json());
 
 // CORS - allow only your frontend
-const allowedOrigins = [
-  'https://vedi-gorakh.github.io',
-  
-];
-
+const cors = require('cors');
 app.use(cors({
-  origin: (origin, callback) => {
-    if (!origin || allowedOrigins.includes(origin)) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true,
+  origin: 'https://vedi-gorakh.github.io/BIASBOX'
 }));
+
 
 // Connect to MongoDB
 connectDB();
