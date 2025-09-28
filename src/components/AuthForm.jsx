@@ -18,7 +18,7 @@ export default function AuthForm() {
     try {
       if (isLogin) {
         // LOGIN
-        const res = await axiosInstance.post('/api/auth/login', { email, password });
+        const res = await axiosInstance.post('/auth/login', { email, password });
         const { token, user } = res.data;
 
         if (!token || !user) throw new Error("Invalid login response");
@@ -33,7 +33,7 @@ export default function AuthForm() {
         window.location.reload();
       } else {
         // REGISTER
-        await axiosInstance.post('/api/auth/register', { firstName, lastName, email, password });
+        await axiosInstance.post('/auth/register', { firstName, lastName, email, password });
         alert('Account created successfully!');
       }
 
