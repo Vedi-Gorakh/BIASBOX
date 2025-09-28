@@ -2,7 +2,7 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://biasbox.onrender.com/api', // ✅ includes /api
+  baseURL: 'https://biasbox.onrender.com/', // ✅ includes /api
 });
 
 axiosInstance.interceptors.request.use((config) => {
