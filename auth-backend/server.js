@@ -51,9 +51,19 @@ const app = express();
 app.use(express.json());
 
 // CORS - allow only your frontend
-const FRONTEND_URL = process.env.FRONTEND_URL || 'https://vedi-gorakh.github.io/BIASBOX';
+const allowedOrigins = [
+  'https://vedi-gorakh.github.io',
+  'https://vedi-gorakh.github.io/BIASBOX',
+];
+
 app.use(cors({
-  origin: FRONTEND_URL,
+  origin: (origin, callback) => {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
 }));
 
