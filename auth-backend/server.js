@@ -18,7 +18,7 @@ app.use(express.json());
 // CORS - allow only your frontend
 const cors = require('cors');
 app.use(cors({
-  origin: 'https://vedi-gorakh.github.io/BIASBOX'
+  origin: 'https://vedi-gorakh.github.io'
 }));
 
 
