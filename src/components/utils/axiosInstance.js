@@ -2,15 +2,17 @@
 import axios from 'axios';
 
 const axiosInstance = axios.create({
-  baseURL: 'https://biasbox.onrender.com/', // ✅ includes /api
+  baseURL: 'https://biasbox.onrender.com', // your Render backend
 });
 
-axiosInstance.interceptors.request.use((config) => {
+// Attach JWT token automatically
+axiosInstance.interceptors.request.use((req) => {
   const token = localStorage.getItem('token');
-  if (token) config.headers.Authorization = `Bearer ${token}`;
-  return config;
+  if (token) req.headers.Authorization = `Bearer ${token}`;
+  return req;
 });
 
 export default axiosInstance;
+
 
 

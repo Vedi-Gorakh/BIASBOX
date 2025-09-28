@@ -11,25 +11,20 @@ const userRoutes = require('./routes/userRoutes');
 const orderRoutes = require('./routes/orderRoutes');
 
 const app = express();
-
-// Middleware
-app.use(express.json());
-
-// CORS - allow only your frontend
-const cors = require('cors');
 app.use(cors({
   origin: 'https://vedi-gorakh.github.io'
 }));
-
-
+app.use(express.json());
 // Connect to MongoDB
 connectDB();
-
 // Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);       // profile, password, addresses
 app.use('/api/orders', orderRoutes);
 app.use('/api/profile', profileRoutes);
+
+
+
 
 // Test route
 app.get('/', (req, res) => {

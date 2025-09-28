@@ -1,40 +1,47 @@
 // src/components/AuthForm.jsx
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './AuthForm.css';
-import axiosInstance from '../components/utils/axiosInstance'; // use axiosInstance instead of axios
+import axiosInstance from '../utils/axiosInstance';
 
 export default function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
-
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
+    setError('');
 
     try {
       if (isLogin) {
         // LOGIN
-        const res = await axiosInstance.post('api/auth/login', { email, password });
+        const res = await axiosInstance.post('/api/auth/login', { email, password });
         const { token, user } = res.data;
 
-        if (!token || !user) throw new Error("Invalid login response");
+        if (!token || !user) throw new Error('Invalid login response');
 
         localStorage.setItem('token', token);
         localStorage.setItem('user', JSON.stringify(user));
 
+        // Initialize cart if not exists
         const cartKey = `cart-${user.email}`;
         if (!localStorage.getItem(cartKey)) localStorage.setItem(cartKey, JSON.stringify([]));
 
-        alert(`Login successful! Welcome ${user.firstName}`);
-        window.location.reload();
+        alert(`Login successful! Welcome ${user.firstName || user.username}`);
+        navigate('/'); // Redirect to homepage or dashboard
       } else {
         // REGISTER
-        await axiosInstance.post('api/auth/register', { firstName, lastName, email, password });
-        alert('Account created successfully!');
+        await axiosInstance.post('/api/auth/register', { firstName, lastName, email, password });
+        alert('Account created successfully! You can now login.');
+        setIsLogin(true); // Switch to login form after registration
       }
 
       // Clear form
@@ -44,7 +51,9 @@ export default function AuthForm() {
       setLastName('');
     } catch (err) {
       console.error('Auth error:', err.response || err.message);
-      alert(err.response?.data?.message || 'Something went wrong');
+      setError(err.response?.data?.message || 'Something went wrong');
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -54,6 +63,7 @@ export default function AuthForm() {
     setPassword('');
     setFirstName('');
     setLastName('');
+    setError('');
   };
 
   return (
@@ -98,7 +108,11 @@ export default function AuthForm() {
 
           {isLogin && <p className="forgot">Forgot your Password?</p>}
 
-          <button type="submit">{isLogin ? 'SIGN IN' : 'CREATE'}</button>
+          {error && <p className="error-message">{error}</p>}
+
+          <button type="submit" disabled={loading}>
+            {loading ? (isLogin ? 'Signing in...' : 'Creating...') : isLogin ? 'SIGN IN' : 'CREATE'}
+          </button>
 
           <p className="toggle-text">
             {isLogin ? (
@@ -116,5 +130,7 @@ export default function AuthForm() {
     </div>
   );
 }
+
+
 
 
