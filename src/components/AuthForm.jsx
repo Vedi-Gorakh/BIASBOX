@@ -11,7 +11,7 @@ export default function AuthForm() {
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  const API_URL = "http://localhost:5000/api/auth";
+  const API_URL = "https://biasbox.onrender.com";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
