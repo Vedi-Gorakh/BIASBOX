@@ -1,7 +1,7 @@
 // src/components/AuthForm.jsx
 import React, { useState } from 'react';
 import './AuthForm.css';
-import axiosInstance from './utils/axiosInstance'; // use axiosInstance instead of axios
+import axiosInstance from '../components/utils/axiosInstance'; // use axiosInstance instead of axios
 
 export default function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
