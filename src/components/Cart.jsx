@@ -1,10 +1,13 @@
+// src/components/Cart.jsx
 import React, { useEffect, useState } from 'react';
 import './Cart.css';
 import { useNavigate } from 'react-router-dom';
+
 export default function Cart() {
   const [cartItems, setCartItems] = useState([]);
   const [userEmail, setUserEmail] = useState("");
   const navigate = useNavigate();
+
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("user"));
     if (user) {
@@ -73,9 +76,12 @@ export default function Cart() {
 
       <div className="cart-summary">
         <p><strong>Total:</strong> ₹{total}</p>
-        <button onClick={() => navigate("/checkout")} className="checkout-btn">Proceed to Checkout</button>
+        <button onClick={() => navigate("/checkout")} className="checkout-btn">
+          Proceed to Checkout
+        </button>
       </div>
     </div>
   );
 }
+
 

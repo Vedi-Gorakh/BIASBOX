@@ -1,17 +1,16 @@
+// src/components/AuthForm.jsx
 import React, { useState } from 'react';
 import './AuthForm.css';
-import axios from 'axios';
+import axiosInstance from '../axiosInstance'; // use axiosInstance instead of axios
 
 export default function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
 
-  // Form fields
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
 
-  const API_URL = "https://biasbox.onrender.com";
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -19,35 +18,23 @@ export default function AuthForm() {
     try {
       if (isLogin) {
         // LOGIN
-        const res = await axios.post(`${API_URL}/login`, { email, password });
-
+        const res = await axiosInstance.post('/auth/login', { email, password });
         const { token, user } = res.data;
 
         if (!token || !user) throw new Error("Invalid login response");
 
-        // Save token and user in localStorage
-        localStorage.setItem("token", token);
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem('token', token);
+        localStorage.setItem('user', JSON.stringify(user));
 
-        // Create cart key if not exists
-        const userEmail = user.email;
-        const cartKey = `cart-${userEmail}`;
-        if (!localStorage.getItem(cartKey)) {
-          localStorage.setItem(cartKey, JSON.stringify([]));
-        }
+        const cartKey = `cart-${user.email}`;
+        if (!localStorage.getItem(cartKey)) localStorage.setItem(cartKey, JSON.stringify([]));
 
         alert(`Login successful! Welcome ${user.firstName}`);
-        window.location.reload(); // Refresh to update UI (navbar etc.)
+        window.location.reload();
       } else {
         // REGISTER
-        const res = await axios.post(`${API_URL}/register`, {
-          firstName,
-          lastName,
-          email,
-          password,
-        });
-
-        alert("Account created successfully!");
+        await axiosInstance.post('/auth/register', { firstName, lastName, email, password });
+        alert('Account created successfully!');
       }
 
       // Clear form
@@ -56,14 +43,13 @@ export default function AuthForm() {
       setFirstName('');
       setLastName('');
     } catch (err) {
-      console.error("Auth error:", err.response || err.message);
-      alert(err.response?.data?.message || "Something went wrong");
+      console.error('Auth error:', err.response || err.message);
+      alert(err.response?.data?.message || 'Something went wrong');
     }
   };
 
   const toggleForm = () => {
     setIsLogin(!isLogin);
-    // Clear form when switching
     setEmail('');
     setPassword('');
     setFirstName('');
@@ -117,13 +103,11 @@ export default function AuthForm() {
           <p className="toggle-text">
             {isLogin ? (
               <>
-                Don't have an account?{' '}
-                <span onClick={toggleForm}>Create one</span>
+                Don't have an account? <span onClick={toggleForm}>Create one</span>
               </>
             ) : (
               <>
-                Already have an account?{' '}
-                <span onClick={toggleForm}>Sign in</span>
+                Already have an account? <span onClick={toggleForm}>Sign in</span>
               </>
             )}
           </p>
@@ -132,4 +116,5 @@ export default function AuthForm() {
     </div>
   );
 }
+
 
