@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AuthForm.css';
-import axiosInstance from '../utils/axiosInstance';
+import axiosInstance from './utils/axiosInstance';
 
 export default function AuthForm() {
   const [isLogin, setIsLogin] = useState(true);
